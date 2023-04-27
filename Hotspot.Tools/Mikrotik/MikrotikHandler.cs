@@ -15,8 +15,8 @@ namespace Hotspot.Tools.Mikrotik
 
         public MikrotikHandler()
         {
-            MkUsername = "sistema";
-            MkPassword = "134system";
+            MkUsername = "kartu";
+            MkPassword = "j490h8564hj589";
         }
 
         public async Task CreateHotspotUser(string user, string ip, TimeSpan time, long franchise, string profile)
