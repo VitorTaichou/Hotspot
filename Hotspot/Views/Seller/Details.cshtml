@@ -125,17 +125,17 @@
 
     <div class="row mb-1">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" hidden>
-                <a class="nav-link" id="batch-tab" data-toggle="tab" href="#batch" role="tab" aria-controls="batch" aria-selected="false">Lotes</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link active" id="catalogBatch-tab" data-toggle="tab" href="#catalogBatch" role="tab" aria-controls="catalogBatch" aria-selected="true">Lotes de Catálogo</a>
+            </li>
+            <li class="nav-item" hidden>
+                <a class="nav-link" id="batch-tab" data-toggle="tab" href="#batch" role="tab" aria-controls="batch" aria-selected="false">Lotes</a>
             </li>
         </ul>
     </div>
     <div class="row mb-1">
         <div class="tab-content w-100" id="myTabContent">
-            <div class="tab-pane fade show active" id="batch" role="tabpanel" aria-labelledby="batch-tab">
+            <div class="tab-pane fade" id="batch" role="tabpanel" aria-labelledby="batch-tab" hidden>
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
@@ -234,7 +234,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tab-pane fade" id="catalogBatch" role="tabpanel" aria-labelledby="catalogBatch-tab">
+            <div class="tab-pane fade show active" id="catalogBatch" role="tabpanel" aria-labelledby="catalogBatch-tab">
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
