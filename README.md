@@ -51,14 +51,14 @@ Do the steps below to create the project directory and give permissions.
 - Give permissions to the necessary users on the folder `/var/www/`, recursivelly.
 
 ### 6. Configure ASP.NET Core as Service
-Create a VirtualHost file called `HotspotVelosonet.conf` at `/etc/apache2/sites-available/`:
+Create a VirtualHost file called `Hotspot.conf` at `/etc/apache2/sites-available/`:
 ```
-sudo nano /etc/apache2/sites-available/HotspotVelosonet.conf
+sudo nano /etc/apache2/sites-available/Hotspot.conf
 ```
 The file must contain the following content, which will configure the site to respond on port 80:
 ```
 <VirtualHost *:80>
-	ServerName hotspot.velosonet.com.br
+	ServerName hotspot.com.br
 	ProxyPreserveHost On
 	ProxyPass / https://localhost:5001/
 	ProxyPassReverse / https://localhost:5001/
@@ -76,25 +76,25 @@ sudo a2dissite 000-default.conf
 ```
 Activate the Hotspot Site and check the syntax:
 ```
-sudo a2ensite HotspotVelosonet.conf
+sudo a2ensite Hotspot.conf
 sudo apachectl configtest
 ```
 Restart `apache2` service:
 ```
 sudo service apache2 restart
 ```
-Create a Systemd Service file called `/etc/systemd/system/` at `HotspotVelosonet.service`:
+Create a Systemd Service file called `/etc/systemd/system/` at `Hotspot.service`:
 ```
-sudo nano /etc/systemd/system/HotspotVelosonet.service
+sudo nano /etc/systemd/system/Hotspot.service
 ```
 The file must contain the following content:
 ```
 [Unit]
-Description=Velosonet Hotspot Service
+Description=Hotspot Service
 
 [Service]
 WorkingDirectory=/var/www/hotspot
-ExecStart=/usr/bin/dotnet /var/www/hotspot/HotspotVeloso.dll
+ExecStart=/usr/bin/dotnet /var/www/hotspot/Hotspot.dll
 Restart=always
 # Restart service after 10 seconds if the dotnet service crashes:
 RestartSec=10
@@ -108,8 +108,8 @@ WantedBy=multi-user.target
 ```
 Enable and Start the service created:
 ```
-sudo systemctl enable HotspotVelosonet.service
-sudo systemctl start HotspotVelosonet.service
+sudo systemctl enable Hotspot.service
+sudo systemctl start Hotspot.service
 ```
 
 ## Conclusion
