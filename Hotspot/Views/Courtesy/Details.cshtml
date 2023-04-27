@@ -1,0 +1,31 @@
+﻿@model Hotspot.Models.Courtesy.CourtesyViewModel;
+@{
+    ViewData["Title"] = Model.FullName + " - Cortesia";
+}
+
+<h2>@Model.FullName</h2>
+<h6>Cortesia</h6>
+<hr />
+
+<div class="container">
+    <div class="row mb-2">
+        <a class="btn btn-secondary mr-1" asp-controller="Courtesy" asp-action="Index">Voltar</a>
+        @if (User.IsInRole("Administrator"))
+        {
+            <a class="btn btn-primary mr-1" asp-controller="Courtesy" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+            <a class="btn btn-danger mr-1" onclick="return confirm('Deseja excluir o Cortesia de @Model.FullName?')" asp-controller="Courtesy" asp-action="Delete" asp-route-id="@Model.Id">Remover Cortesia</a>
+        }
+    </div>
+    <div class="row mb-2">
+        <div class="card bg-light card-body">
+            <dl>
+                <dt>Nome Completo</dt>
+                <dd>@Model.FullName</dd>
+                <dt>Senha</dt>
+                <dd>@Model.Code</dd>
+                <dt>Descrição</dt>
+                <dd>@Model.Description</dd>
+            </dl>
+        </div>
+    </div>
+</div>

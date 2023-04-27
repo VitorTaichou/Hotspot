@@ -1,0 +1,56 @@
+<style>
+    .bg
+    {
+        display: block;
+        background-color:#060041;
+    }
+    .center
+    {
+        text-align-last: center;
+    }
+</style>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body class="bg">
+    <div class="container">
+        <div class="row h-100 center">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 my-auto center">
+                <img src="ark.png" />
+                <form class="form" name="login" action="http://192.168.0.110:5000/mikrotik/login" method="get" background="#A03472" onSubmit="return doLogin()">
+                    <div class="form-group">
+                        <input type="hidden" name="ip" value="192.168.0.168" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" autocomplete="on" name="password" placeholder="CHAVE DE ACESSO" size="15"/>
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" name="submit" type="submit" value="ACESSAR" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+</body>
+</html>

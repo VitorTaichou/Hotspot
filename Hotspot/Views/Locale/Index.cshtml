@@ -1,0 +1,38 @@
+﻿@model Hotspot.Models.Locale.LocaleListviewModel;
+
+@{
+    ViewData["Title"] = "Localidades";
+}
+
+<h2>Localidades</h2>
+<h6>Lista de Localidades Cadastradas</h6>
+<hr />
+<div class="container">
+    <div class="row mb-2">
+        <a class="btn btn-success mr-1" asp-action="Add">Cadastrar Localidade</a>
+        <a class="btn btn-secondary" asp-action="Index" asp-controller="Home">Voltar</a>
+    </div>
+    <div class="row mb-2">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var locale in Model.LocaleList)
+                {
+                    <tr>
+                        <td>@locale.Id</td>
+                        <td><a asp-action="Details" asp-route-id="@locale.Id">@locale.City</a></td>
+                        <td>@locale.State</td>
+                        <td>@locale.Type</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

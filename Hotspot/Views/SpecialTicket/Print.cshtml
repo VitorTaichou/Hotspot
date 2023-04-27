@@ -1,0 +1,77 @@
+﻿@model Hotspot.Models.SpecialTicket.SpecialTicketViewModel;
+@{
+    Layout = null;
+}
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        font-size: 10px;
+        font-family: Tahoma;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    th, td {
+        padding: 1px;
+        text-align: center;
+        background-color: white;
+    }
+
+    table {
+        display: inline-table;
+        width: 180px;
+        margin-top: 4px;
+    }
+
+    th {
+        font-weight: bold;
+        border: 0px;
+        background-color: transparent;
+    }
+
+    table[value="10"] {
+        background-color: #ecee00;
+    }
+</style>
+
+<table value="10">
+    <thead>
+        <tr>
+            <th colspan="2" style="color: black">
+                <img src="~/img/logo.png" height="15" class="align-center"/>
+                TICKET DE ACESSO
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Valor</td>
+            <td>R$ 10.00</td>
+        </tr>
+        <tr>
+            <td>Duração</td>
+            <td>7 Dias</td>
+        </tr>
+        <tr>
+            <td>Vendedor</td>
+            <td>@Model.SellerName</td>
+        </tr>
+        <tr>
+            <td>Local</td>
+            <td>@Model.SellerCity</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="2" style="background-color: #3b3b3b; color: white;">
+                TICKET<br />
+                <div style="font-size: 13px">
+                    @Model.Code
+                </div>
+            </th>
+        </tr>
+    </tfoot>
+</table>
+

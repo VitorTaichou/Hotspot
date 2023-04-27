@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotspot", "Hotspot\Hotspot.csproj", "{A402F938-0776-44E0-A3DA-610905FD9AB1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotspot.Model", "Hotspot.Model\Hotspot.Model.csproj", "{6329D866-3BA5-4D9E-9D3F-9A8420467FBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotspot.Services", "Hotspot.Services\Hotspot.Services.csproj", "{2D689E3E-B267-4B72-A1DB-CDE4F939AD2C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotspot.Tools", "Hotspot.Tools\Hotspot.Tools.csproj", "{98583A75-C64E-4477-ACBB-22BB5DAB1055}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MKLandingPage", "MKLandingPage", "{9B6F86D9-42D8-4DB1-B33B-CE44672AED93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "flash", "flash", "{DE6AA716-BAE4-41A0-95F0-E1460C2207FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hotspot", "hotspot", "{093C7636-A99C-442B-9B0A-02B48F746EB5}"
+	ProjectSection(SolutionItems) = preProject
+		MKLandingPage\flash\hotspot\alogin.html = MKLandingPage\flash\hotspot\alogin.html
+		MKLandingPage\flash\hotspot\ark.png = MKLandingPage\flash\hotspot\ark.png
+		MKLandingPage\flash\hotspot\error.html = MKLandingPage\flash\hotspot\error.html
+		MKLandingPage\flash\hotspot\errors.txt = MKLandingPage\flash\hotspot\errors.txt
+		MKLandingPage\flash\hotspot\lock.png = MKLandingPage\flash\hotspot\lock.png
+		MKLandingPage\flash\hotspot\lock2.png = MKLandingPage\flash\hotspot\lock2.png
+		MKLandingPage\flash\hotspot\login.css = MKLandingPage\flash\hotspot\login.css
+		MKLandingPage\flash\hotspot\login.html = MKLandingPage\flash\hotspot\login.html
+		MKLandingPage\flash\hotspot\logout.html = MKLandingPage\flash\hotspot\logout.html
+		MKLandingPage\flash\hotspot\md5.js = MKLandingPage\flash\hotspot\md5.js
+		MKLandingPage\flash\hotspot\mobile-apps-3d-ss-1920.jpg = MKLandingPage\flash\hotspot\mobile-apps-3d-ss-1920.jpg
+		MKLandingPage\flash\hotspot\radvert.html = MKLandingPage\flash\hotspot\radvert.html
+		MKLandingPage\flash\hotspot\redirect.html = MKLandingPage\flash\hotspot\redirect.html
+		MKLandingPage\flash\hotspot\rlogin.html = MKLandingPage\flash\hotspot\rlogin.html
+		MKLandingPage\flash\hotspot\status.html = MKLandingPage\flash\hotspot\status.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A402F938-0776-44E0-A3DA-610905FD9AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A402F938-0776-44E0-A3DA-610905FD9AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A402F938-0776-44E0-A3DA-610905FD9AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A402F938-0776-44E0-A3DA-610905FD9AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6329D866-3BA5-4D9E-9D3F-9A8420467FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6329D866-3BA5-4D9E-9D3F-9A8420467FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6329D866-3BA5-4D9E-9D3F-9A8420467FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6329D866-3BA5-4D9E-9D3F-9A8420467FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D689E3E-B267-4B72-A1DB-CDE4F939AD2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D689E3E-B267-4B72-A1DB-CDE4F939AD2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D689E3E-B267-4B72-A1DB-CDE4F939AD2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D689E3E-B267-4B72-A1DB-CDE4F939AD2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98583A75-C64E-4477-ACBB-22BB5DAB1055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98583A75-C64E-4477-ACBB-22BB5DAB1055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98583A75-C64E-4477-ACBB-22BB5DAB1055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98583A75-C64E-4477-ACBB-22BB5DAB1055}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE6AA716-BAE4-41A0-95F0-E1460C2207FD} = {9B6F86D9-42D8-4DB1-B33B-CE44672AED93}
+		{093C7636-A99C-442B-9B0A-02B48F746EB5} = {DE6AA716-BAE4-41A0-95F0-E1460C2207FD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCB048D8-EF8B-48B2-B954-28FA25A920FA}
+	EndGlobalSection
+EndGlobal

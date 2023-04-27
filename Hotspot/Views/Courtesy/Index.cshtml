@@ -1,0 +1,42 @@
+﻿@model Hotspot.Models.Courtesy.CourtesyListViewModel;
+@{
+    ViewData["Title"] = "Lista de Cortesias";
+}
+
+<h2>Cortesias</h2>
+<h6>Lista de Cortesias</h6>
+<hr />
+<div class="container">
+    <div class="row mb-2">
+        <a class="btn btn-success" asp-action="Add" asp-controller="Courtesy">Criar Nova Cortesia</a>
+    </div>
+    <div class="row mb-2">
+        <form class="form-inline" method="post">
+            <input asp-for="Search" type="text" class="form-control mr-1" autofocus="autofocus" onFocus="this.select()"/>
+            <input type="submit" class="btn btn-primary text-light" value="Buscar" asp-action="Index" />
+        </form>
+    </div>
+    <div class="row mb-2">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Senha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var courtesy in Model.Courtesies)
+                {
+                    <tr>
+                        <td>@courtesy.Id</td>
+                        <td><a asp-action="Details" asp-controller="Courtesy" asp-route-id="@courtesy.Id">@courtesy.FullName</a></td>
+                        <td>@courtesy.Description</td>
+                        <td>@courtesy.Code</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

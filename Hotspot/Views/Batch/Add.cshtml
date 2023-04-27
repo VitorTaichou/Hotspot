@@ -1,0 +1,93 @@
+﻿@model Hotspot.Models.Batch.BatchCreateViewModel
+@{
+    ViewData["Title"] = "Criar Novo Lote";
+}
+
+<style>
+    .green-t {
+        color: green;
+    }
+</style>
+
+<script>
+    function changePercent(e)
+    {
+        var value = $('#select-type').find(":selected").data("per");
+        document.getElementById("commission").value = parseInt(value);
+    }
+</script>
+
+@if (ViewBag.SellerName != null)
+{
+    <h2>@ViewBag.SellerName</h2>
+}
+<h6>Criar Novo Lote</h6>
+<div class="container">
+    <form class="form" asp-action="Add" method="post">
+        <div class="row card card-body mb-2">
+            <div class="container">
+                <div class="row mb-1">
+                    <div class="col mb-3">
+                        <label asp-for="OneHourQty" class="control-label"><span class="green-t font-weight-bolder">R$ 2,00</span> - 1h</label>
+                        <input asp-for="OneHourQty" class="form-control" />
+                        <span asp-validation-for="OneHourQty" class="text-danger"></span>
+                    </div>
+                    <div class="col mb-3">
+                        <label asp-for="TwoHourQty" class="control-label"><span class="green-t font-weight-bolder">R$ 3,00</span> - 2h</label>
+                        <input asp-for="TwoHourQty" class="form-control" />
+                        <span asp-validation-for="TwoHourQty" class="text-danger"></span>
+                    </div>
+                    <div class="col mb-3">
+                        <label asp-for="ThreeHourQty" class="control-label"><span class="green-t font-weight-bolder">R$ 5,00</span> - 3h</label>
+                        <input asp-for="ThreeHourQty" class="form-control" />
+                        <span asp-validation-for="ThreeHourQty" class="text-danger"></span>
+                    </div>
+                    <div class="col mb-3">
+                        <label asp-for="SixHourQty" class="control-label"><span class="green-t font-weight-bolder">R$ 10,00</span> - 6h</label>
+                        <input asp-for="SixHourQty" class="form-control" />
+                        <span asp-validation-for="SixHourQty" class="text-danger"></span>
+                    </div>
+                    <div class="col mb-3" style="display: none;">
+                        <label asp-for="SellerId" class="control-label"></label>
+                        <input asp-for="SellerId" class="form-control" />
+                        <span asp-validation-for="SellerId" class="text-danger"></span>
+                    </div>
+                    <div class="col mb-3">
+                        <label asp-for="PaymentMethod" class="control-label">Forma de Pagamento</label>
+                        <select asp-for="PaymentMethod" id="select-type" class="form-control" onchange="changePercent(event)">
+                            <option data-per="30" value="A VISTA">A Vista</option>
+                            <option data-per="10" value="A PRAZO">A Prazo</option>
+                        </select>
+                        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 mb-3">
+                        <label asp-for="Commission" class="control-label">Comissão (1 - 100)</label>
+                        <input asp-for="Commission" id="commission" value="30" type="number" max="100" min="1" class="form-control" />
+                        <span asp-validation-for="Commission" class="text-danger"></span>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <label asp-for="CashFlowId" class="control-label">Caixa</label>
+                        <select asp-for="CashFlowId" class="form-control">
+                            @if (ViewBag.CashFlowList != null)
+                            {
+                                @foreach (var cashFlow in ViewBag.CashFlowList)
+                                {
+                                    <option value="@cashFlow.Id">@cashFlow.Name</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="CashFlowId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="submit" onclick="this.form.submit();this.disabled = true;" value="Criar Lote" class="btn btn-success mr-1" />
+            <a class="btn btn-secondary mr-1" asp-action="Details" asp-controller="Seller" asp-route-id="@Model.SellerId">Voltar</a>
+        </div>
+    </form>
+</div>
+

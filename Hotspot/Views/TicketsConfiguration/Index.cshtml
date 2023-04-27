@@ -1,0 +1,40 @@
+﻿@model Hotspot.Models.Configuration.TicketsConfigurationViewModel
+
+@{
+    ViewData["Title"] = "Config. de Tickets Padrão";
+}
+
+<h2>Configuração dos Tickets Padrão</h2>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Set">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DefaultBandwidth" class="control-label">Banda Padrão</label>
+                    <input asp-for="DefaultBandwidth" class="form-control" />
+                    <span asp-validation-for="DefaultBandwidth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DefaultFranchise" class="control-label">Franquia Padrão</label>
+                    <input asp-for="DefaultFranchise" class="form-control" />
+                    <span asp-validation-for="DefaultFranchise" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DefaultIp" class="control-label">Ip do Mikrotik</label>
+                    <input asp-for="DefaultIp" class="form-control" />
+                    <span asp-validation-for="DefaultIp" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DefaultServer" class="control-label">Ip do Servidor Hotspot</label>
+                    <input asp-for="DefaultServer" class="form-control" />
+                    <span asp-validation-for="DefaultServer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Alterar e Salvar" class="btn btn-success mr-1" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

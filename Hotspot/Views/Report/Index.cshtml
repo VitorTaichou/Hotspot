@@ -1,0 +1,355 @@
+﻿@model Hotspot.Models.Report.ReportListViewModel;
+@{
+    ViewData["Title"] = "Relatórios";
+}
+
+<style>
+    th {
+        font-size: small;
+    }
+
+    td {
+        font-size: small;
+    }
+</style>
+
+<h1>Relatório</h1>
+<hr />
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-diario-tab" data-toggle="tab" href="#nav-diario" role="tab" aria-controls="nav-diario" aria-selected="true">Diário</a>
+        <a class="nav-item nav-link" id="nav-mensal-tab" data-toggle="tab" href="#nav-mensal" role="tab" aria-controls="nav-mensal" aria-selected="false">Mensal</a>
+        <a class="nav-item nav-link" id="nav-mes-anterior-tab" data-toggle="tab" href="#nav-mes-anterior" role="tab" aria-controls="nav-mes-anterior" aria-selected="false">Mês Anterior</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-diario" role="tabpanel" aria-labelledby="nav-diario-tab">
+        <div class="container">
+            <div class="row mt-2">
+                <h5>Pendencias</h5>
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Lote</th>
+                            <th>Data da Venda</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sale in Model.DayPendencies)
+                        {
+                            if (@sale.SaleDate < DateTime.Now.AddDays(-15))
+                            {
+                                <tr style="color: red">
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>
+                                        @sale.PaymentMethod
+
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <a class="badge badge-warning" onclick="return confirm('Deseja informar o pagamento do Registro @sale.SaleId?')" asp-action="PaymentReport" asp-controller="Sale" asp-route-id="@sale.SaleId">Informar Pagamento</a>
+                                        }
+                                    </td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>
+                                        @sale.PaymentMethod
+
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <a class="badge badge-warning" onclick="return confirm('Deseja informar o pagamento do Registro @sale.SaleId?')" asp-action="PaymentReport" asp-controller="Sale" asp-route-id="@sale.SaleId">Informar Pagamento</a>
+                                        }
+                                    </td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-2">
+                <h5>Confirmados</h5>
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Lote</th>
+                            <th>Data da Venda</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sale in Model.DayPaid)
+                        {
+                            if (@sale.SaleDate < DateTime.Now.AddDays(-15))
+                            {
+                                <tr style="color: red">
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>@sale.PaymentMethod</td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>@sale.PaymentMethod</td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-mensal" role="tabpanel" aria-labelledby="nav-mensal-tab">
+        <div class="container">
+            <div class="row mt-2">
+                <h5>Pendencias</h5>
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Lote</th>
+                            <th>Data da Venda</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sale in Model.MonthPendencies)
+                        {
+                            if (@sale.SaleDate < DateTime.Now.AddDays(-15))
+                            {
+                                <tr style="color: red">
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>
+                                        @sale.PaymentMethod
+
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <a class="badge badge-warning" onclick="return confirm('Deseja informar o pagamento do Registro @sale.SaleId?')" asp-action="PaymentReport" asp-controller="Sale" asp-route-id="@sale.SaleId">Informar Pagamento</a>
+                                        }
+                                    </td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>
+                                        @sale.PaymentMethod
+
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <a class="badge badge-warning" onclick="return confirm('Deseja informar o pagamento do Registro @sale.SaleId?')" asp-action="PaymentReport" asp-controller="Sale" asp-route-id="@sale.SaleId">Informar Pagamento</a>
+                                        }
+                                    </td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-2">
+                <h5>Confirmados</h5>
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Lote</th>
+                            <th>Data da Venda</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sale in Model.MonthPaid)
+                        {
+                            if (@sale.SaleDate < DateTime.Now.AddDays(-15))
+                            {
+                                <tr style="color: red">
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>@sale.PaymentMethod</td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>@sale.PaymentMethod</td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-mes-anterior" role="tabpanel" aria-labelledby="nav-mes-anterior-tab">
+        <div class="container">
+            <div class="row mt-2">
+                <h5>Pendencias</h5>
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Lote</th>
+                            <th>Data da Venda</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sale in Model.LastMonthPendencies)
+                        {
+                            if (@sale.SaleDate < DateTime.Now.AddDays(-15))
+                            {
+                                <tr style="color: red">
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>
+                                        @sale.PaymentMethod
+
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <a class="badge badge-warning" onclick="return confirm('Deseja informar o pagamento do Registro @sale.SaleId?')" asp-action="PaymentReport" asp-controller="Sale" asp-route-id="@sale.SaleId">Informar Pagamento</a>
+                                        }
+                                    </td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>
+                                        @sale.PaymentMethod
+
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <a class="badge badge-warning" onclick="return confirm('Deseja informar o pagamento do Registro @sale.SaleId?')" asp-action="PaymentReport" asp-controller="Sale" asp-route-id="@sale.SaleId">Informar Pagamento</a>
+                                        }
+                                    </td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-2">
+                <h5>Confirmados</h5>
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Lote</th>
+                            <th>Data da Venda</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sale in Model.LastMonthPaid)
+                        {
+                            if (@sale.SaleDate < DateTime.Now.AddDays(-15))
+                            {
+                                <tr style="color: red">
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>@sale.PaymentMethod</td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@sale.SaleId</td>
+                                    <td>@sale.SellerFullName</td>
+                                    <td>@sale.SellerCity</td>
+                                    <td>@sale.BatchId</td>
+                                    <td>@sale.SaleDate.ToShortDateString()</td>
+                                    <td>@sale.PaymentMethod</td>
+                                    <td>R$ @String.Format("{0:0.00}", @sale.TotalPayment)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

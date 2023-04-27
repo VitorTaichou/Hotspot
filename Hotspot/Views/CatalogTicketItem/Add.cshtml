@@ -1,0 +1,72 @@
+﻿@model Hotspot.Models.CatalogTicket.CatalogTicketItemViewModel
+
+@{
+    ViewData["Title"] = "Novo Item do Catálogo";
+}
+
+<h2>Novo Item do Catálogo</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Add" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Descrição</label>
+                    <input asp-for="Description" maxlength="30" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Time" class="control-label">Tempo</label>
+                    <div class="row justify-content-around">
+                        <div class="col-5">
+                            <div class="row">
+                                <label class="col-form-label-sm mb-1">Dias</label>
+                            </div>
+                            <div class="row">
+                                <input asp-for="TimeDays" type="number" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="row">
+                                <label class="col-form-label-sm mb-1">Horas</label>
+                            </div>
+                            <div class="row">
+                                <input asp-for="Time" type="time" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Time" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Bandwidth" class="control-label">Banda (em Megas)</label>
+                    <input asp-for="Bandwidth" type="number" class="form-control" />
+                    <span asp-validation-for="Bandwidth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Franchise" class="control-label">Franquia (em Megas)</label>
+                    <input asp-for="Franchise" type="number" class="form-control" />
+                    <span asp-validation-for="Franchise" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ExpireDays" class="control-label">Validade (Dias)</label>
+                    <input asp-for="ExpireDays" type="number" class="form-control" />
+                    <span asp-validation-for="ExpireDays" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label">Cor do Ticket</label>
+                    <input asp-for="Color" class="form-control" type="color" value="#4287f5"/>
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Value" class="control-label">Valor</label>
+                    <input asp-for="Value" type="number" step="any" maxlength="7" class="form-control" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Criar" class="btn btn-success" />
+                    <a class="btn btn-secondary" asp-action="Index">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

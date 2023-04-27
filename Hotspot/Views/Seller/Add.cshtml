@@ -1,0 +1,120 @@
+﻿@model Hotspot.Models.Seller.SellerViewModel
+
+@{
+    ViewData["Title"] = "Cadastro do Vendedor";
+}
+<div class="row mb-2">
+    <h2>Cadastro do Vendedor</h2>
+</div>
+<form asp-action="Add">
+    <div class="row mb-2">
+        <div class="card col bg-light mr-1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body">
+                <h4 class="card-title">Informações pessoais</h4>
+                <div class="card-text">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Nome</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Surname" class="control-label">Sobrenome</label>
+                        <input asp-for="Surname" class="form-control" />
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cpf" class="control-label">CPF</label>
+                        <input asp-for="Cpf" class="form-control" />
+                        <span asp-validation-for="Cpf" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Rg" class="control-label">RG</label>
+                        <input asp-for="Rg" class="form-control" />
+                        <span asp-validation-for="Rg" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sex" class="control-label">Sexo</label>
+                        <select asp-for="Sex" class="form-control">
+                            <option>M</option>
+                            <option>F</option>
+                        </select>
+                        <span asp-validation-for="Sex" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Birthday" class="control-label">Data de Nascimento</label>
+                        <input asp-for="Birthday" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                        <span asp-validation-for="Birthday" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col bg-light col mr-1">
+            <div class="card-body">
+                <h4 class="card-title">Endereço</h4>
+                <div class="card-text">
+                    <div class="form-group">
+                        <label asp-for="Street" class="control-label">Rua</label>
+                        <input asp-for="Street" class="form-control" />
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Number" class="control-label">Número</label>
+                        <input asp-for="Number" class="form-control" />
+                        <span asp-validation-for="Number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Neighborhood" class="control-label">Bairro</label>
+                        <input asp-for="Neighborhood" class="form-control" />
+                        <span asp-validation-for="Neighborhood" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LocaleId" class="control-label">Localidade</label>
+                        <select asp-for="LocaleId" class="form-control">
+                            @if (ViewBag.Locales != null)
+                            {
+                                @foreach (var locale in ViewBag.Locales)
+                                {
+                                    <option value="@locale.Id">@locale.City, @locale.State</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="LocaleId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col bg-light">
+            <div class="card-body">
+                <h4 class="card-title">Contato</h4>
+                <div class="card-text">
+                    <div class="form-group col">
+                        <label asp-for="Email" class="control-label">E-Mail</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="PhoneNumber1" class="control-label">Telefone 1</label>
+                        <input asp-for="PhoneNumber1" class="form-control" />
+                        <span asp-validation-for="PhoneNumber1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="PhoneNumber2" class="control-label">Telefone 2</label>
+                        <input asp-for="PhoneNumber2" class="form-control" />
+                        <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="form-group">
+            <input type="submit" onclick="this.form.submit();this.disabled = true;" value="Cadastrar Vendedor" class="btn btn-success" />
+            <a class="btn btn-secondary" asp-action="Index">Voltar</a>
+        </div>
+    </div>
+</form>
+
+

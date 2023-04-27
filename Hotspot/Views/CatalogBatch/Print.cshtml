@@ -1,0 +1,132 @@
+﻿@using System.Drawing;
+@model Hotspot.Models.CatalogTicket.CatalogTicketItemListViewModel;
+@{
+    Layout = null;
+}
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        font-size: 10px;
+        font-family: Tahoma;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    th, td {
+        padding: 1px;
+        text-align: center;
+        background-color: white;
+    }
+
+    table {
+        display: inline-table;
+        width: 180px;
+        margin-top: 4px;
+    }
+
+    th {
+        font-weight: bold;
+        border: 0px;
+        background-color: transparent;
+    }
+
+    table[value="6"] {
+        background-color: #590079;
+    }
+
+    table[value="5"] {
+        background-color: #590079;
+    }
+
+    table[value="4"] {
+        background-color: #590079;
+    }
+
+    table[value="3"] {
+        background-color: #c76800;
+    }
+
+    table[value="2"] {
+        background-color: #0300cc;
+    }
+
+    table[value="1"] {
+        background-color: #0cac00;
+    }
+
+    table[value="0"] {
+        background-color: #3b3b3b;
+    }
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.PageTitle</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        @foreach (var ticket in Model.ItemsList)
+        {
+            <table style="background-color: @ticket.Color">
+                <thead>
+                    <tr>
+                        @if(ColorTranslator.FromHtml(ticket.Color).GetBrightness() < 0.5)
+                        {
+                            //Dark ticket
+                            <th colspan="2" style="color: white" >
+                                <img style="color: white" src="~/img/logo.png" height="15" class="align-center" />
+                                TICKET DE ACESSO
+                            </th>
+                        }
+                        else
+                        {
+                            //Light ticket
+                            <th colspan="2" style="color: black">
+                                <img style="color: black" src="~/img/logo.png" height="15" class="align-center" />
+                                TICKET DE ACESSO
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Valor</td>
+                        <td>@ticket.Value</td>
+                    </tr>
+                    <tr>
+                        <td>Tempo</td>
+                        <td>@ticket.Time</td>
+                    </tr>
+                    <tr>
+                        <td>Validade</td>
+                        <td>@ticket.ExpireDays Dias</td>
+                    </tr>
+                    <tr>
+                        <td>Vendedor</td>
+                        <td>@Model.SellerName</td>
+                    </tr>
+                    <tr>
+                        <td>Local</td>
+                        <td>@Model.SellerCity</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2" style="background-color: #3b3b3b; color: white;">
+                            TICKET<br />
+                            <div style="font-size: 13px">
+                                @ticket.Code
+                            </div>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+    </div>
+</body>
+</html>
+
+

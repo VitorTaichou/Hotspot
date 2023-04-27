@@ -1,0 +1,54 @@
+﻿@model Hotspot.Models.Seller.SellerListViewModel
+
+@{
+    ViewData["Title"] = "Lista de Vendedores";
+}
+
+
+<h2>Vendedores</h2>
+<hr />
+<div class="container">
+    <div class="row mb-2">
+        <a class="btn btn-success mr-1" asp-action="Add" asp-controller="Seller">Cadastrar Vendedor</a>
+        <a class="btn btn-primary" asp-action="ByCity">Visão por Cidade</a>
+    </div>
+    <div class="row mb-2">
+        <form class="form-inline" method="post">
+            <input asp-for="Search" type="text" class="form-control mr-1" autofocus="autofocus" onFocus="this.select()" />
+            <input type="submit" class="btn btn-primary text-light" value="Buscar" asp-action="Index" />
+        </form>
+    </div>
+    <div class="row">
+        <h6>Total de Vendedores: @Model.Sellers.Count()</h6>
+    </div>
+    <div class="row">
+        <table class="table table-hover table-sm">
+            <colgroup>
+                <col style="width: 1%" />
+                <col />
+                <col style="width: 20%" />
+                <col style="width: 17%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome Completo</th>
+                    <th>CPF</th>
+                    <th>Cidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var seller in Model.Sellers)
+                {
+                    <tr>
+                        <td>@seller.Id</td>
+                        <td><a asp-action="Details" asp-route-id=@seller.Id>@seller.FullName.ToUpper()</a></td>
+                        <td>@seller.Locale</td>
+                        <td>@seller.Cpf</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

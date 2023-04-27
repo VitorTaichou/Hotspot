@@ -1,0 +1,118 @@
+﻿@model Hotspot.Models.Ticket.TicketIndexViewModel;
+@{
+    ViewData["Title"] = "Identificar Ticket";
+}
+
+<style>
+    
+</style>
+
+<h2>Identificar Ticket</h2>
+<h6>Informe um Ticket ou Cortesia</h6>
+
+
+<div class="container p-0">
+    <div class="row mb-2">
+        <div class="col">
+            <form class="form-inline" method="post">
+                <input asp-for="Search" type="text" class="form-control mr-1" autofocus="autofocus" />
+                <input type="submit" class="btn btn-primary text-light" value="Buscar" asp-action="Index" />
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-between">
+        @if (Model != null)
+        {
+            @if (Model.Ticket != null)
+            {
+                <div class="col-sm-3 pr-1">
+                    <div class="card card-body bg-light">
+                        <div class="card-text">
+                            <h6>Informações do Ticket</h6>
+                            <dl>
+                                @if (ViewBag.IsTicket == true)
+                                {
+                                    <dt>Senha</dt>
+                                    <dd>@Model.Ticket.Code</dd>
+                                    <dt>Vendedor</dt>
+                                    <dd>@Model.Ticket.SellerName</dd>
+                                    <dt>Lote</dt>
+                                    <dd>@Model.Ticket.BatchId</dd>
+                                    <dt>Tempo Restante</dt>
+                                    <dd>@Model.Ticket.TimeLeft</dd>
+                                    <dt>Franquia (megas)</dt>
+                                    <dd>@Model.Ticket.Franchise</dd>
+                                }
+                                else
+                                {
+                                    <dt>Senha</dt>
+                                    <dd>@Model.Ticket.Code</dd>
+                                    <dt>Cortesia</dt>
+                                    <dd>@Model.Ticket.SellerName</dd>
+                                }
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col pr-1 pl-1">
+                    <div class="card card-body bg-light">
+                        <div class="card-text">
+                            <h6>Conexões</h6>
+                            <table class="table table-sm table-striped col">
+                                <thead>
+                                    <tr>
+                                        <th>Hora da Conexão</th>
+                                        <th>Tempo Restante</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var connection in Model.Ticket.ConnectionHistory)
+                                    {
+                                        <tr>
+                                            <td>@connection.ConnectionTime</td>
+                                            <td>@connection.TimeLeft</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col pl-1">
+                    <div class="card card-body bg-light">
+                        <div class="card-text">
+                            <h6>Logouts</h6>
+                            <table class="table table-sm table-striped col">
+                                <thead>
+                                    <tr>
+                                        <th>Hora do Logout</th>
+                                        <th>Tempo Usado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var logout in Model.Ticket.LogoutHistory)
+                                    {
+                                        <tr>
+                                            <td>@logout.LogoutTime</td>
+                                            <td>@logout.TimeUsed</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card card-body">
+                    <div class="card-text">
+                        <h6>Nenhum Ticket encontrado.</h6>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+

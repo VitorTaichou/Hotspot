@@ -1,0 +1,19 @@
+﻿@model Hotspot.Models.Mikrotik.MikrotikLoginViewModel;
+@{
+    ViewData["Title"] = "Falha no Login";
+}
+
+@if(Model != null)
+{
+    <h1>Ticket Esgotado!</h1>
+    <h4>Ticket: @Model.Password</h4>
+    <h6>Redirecionando para tela de Login do Hotspot</h6>
+}
+else
+{
+    <h1>Ticket não encontrado!</h1>
+    <h6>Redirecionando para tela de Login do Hotspot</h6>
+}
+
+
+<meta http-equiv="refresh" content="15; url=http://mk.hotspot.com.br" />

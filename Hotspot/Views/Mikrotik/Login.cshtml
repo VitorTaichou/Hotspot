@@ -1,0 +1,22 @@
+﻿@model Hotspot.Models.Mikrotik.MikrotikLoginViewModel;
+@{
+    ViewData["Title"] = "Login";
+    decimal d = 0;
+    string f = "";
+
+
+    if (Model.Franchise != null)
+    {
+        d = long.Parse(Model.Franchise) / 1048576;
+        f = Math.Round(d, 1).ToString();
+    }
+}
+
+<h1>Realizando login...</h1>
+@if (Model != null)
+{
+    <h4>Ticket: @Model.Password</h4>
+    <h4>Tempo Restante: @(Model.Time.Days + "d " + Model.Time.ToString(@"hh\:mm\:ss"))</h4>
+}
+<meta http-equiv="refresh" content="5; url=http://mk.hotspot.com.br/login?username=@Model.Password&dst=http://google.com.br" />
+

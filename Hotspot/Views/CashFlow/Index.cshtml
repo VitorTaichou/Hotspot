@@ -1,0 +1,35 @@
+﻿@model Hotspot.Models.CashFlow.CashFlowListViewModel;
+
+@{
+    ViewData["Title"] = "Fluxo de Caixa";
+}
+
+<h2>Fluxo de Caixa</h2>
+
+<div class="container">
+    <div class="row mb-2">
+        <a class="btn btn-success mr-1" asp-action="Add">Novo</a>
+        <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Voltar</a>
+    </div>
+    <div class="row">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Localidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var cashFlow in Model.CashFlowList)
+                {
+                    <tr>
+                        <td>@cashFlow.Id</td>
+                        <td><a asp-action="Details" asp-route-id="@cashFlow.Id">@cashFlow.Name</a></td>
+                        <td>@cashFlow.LocaleViewModel.City, @cashFlow.LocaleViewModel.State</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

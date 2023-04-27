@@ -1,0 +1,303 @@
+﻿@model Hotspot.Models.Seller.SellerViewModel
+@{
+    ViewData["Title"] = Model.Name + " " + Model.Surname + " - Vendedor";
+}
+
+    <script>
+    $(function () {
+        //loop through your buttons and add a click event
+        $('.js-get-batch').on('click', function () {
+            //get the button number of the control
+            var batchId = parseFloat($(this).attr('data-id').replace(',', '.'));
+            var paid = parseFloat($(this).attr('data-paid').replace(',', '.'));
+            var total = parseFloat($(this).attr('data-total').replace(',', '.'));
+            var missing = total - paid;
+
+            //get the input from the modal
+            let inputField = $('#payment').find('input[name="batchId"]');
+
+            //Set Text
+            var valueText = missing.toFixed(2).toString().replace('.', ',');
+
+            //assign the value
+            $(inputField).val(batchId);
+            $("#missing-value").text(valueText);
+            document.getElementById("value").value = valueText;
+            $("#span-id").text(batchId);
+        });
+    });
+    </script>
+
+<style>
+    .td {
+        vertical-align: middle;
+    }
+
+    .th {
+        vertical-align: middle;
+    }
+</style>
+
+<h2>@(Model.Name + " " + Model.Surname)</h2>
+<h6>Vendedor</h6>
+<hr />
+
+<div class="container">
+    <div class="row mb-2" id="controls">
+        <a class="btn btn-primary mr-1" data-toggle="collapse" href="#sellerData">Dados do Vendedor</a>
+        <a class="btn btn-secondary mr-1" asp-action="ByCity">Voltar</a>
+    </div>
+    <div class="row mb-2">
+        @if (Model.HasPendency)
+        {
+            <button class="btn btn-success mr-1" asp-action="Add" asp-controller="Batch" asp-route-id="@Model.Id" disabled>Criar Novo Lote</button>
+        }
+        else
+        {
+            <a class="btn btn-success mr-1" asp-action="Add" asp-controller="Batch" asp-route-id="@Model.Id" hidden>Novo Lote</a>
+        }
+        <a class="btn btn-success mr-1" asp-controller="CatalogBatch" asp-action="Create" asp-route-id="@Model.Id">Novo Lote por Catálogo</a>
+        <a class="btn btn-warning mr-1" asp-controller="SpecialTicket" asp-action="Details" asp-route-id="@Model.Id" hidden>Tickets Especiais</a>
+    </div>
+    <div class="collapse p-0" id="sellerData">
+        <div class="card card-body border-primary mb-3" id="sellerInfo">
+            <div class="row mb-1">
+                <div class="col mr-1">
+                    <div class="card card-body bg-light">
+                        <h4 class="card-title">Informações Pessoais</h4>
+                        <dl>
+                            <dt>Nome</dt>
+                            <dd>@(Model.Name + " " + Model.Surname)</dd>
+                            <dt>CPF</dt>
+                            <dd>@Model.Cpf</dd>
+                            <dt>RG</dt>
+                            <dd>@Model.Rg</dd>
+                            <dt>Sexo</dt>
+                            <dd>@Model.Sex</dd>
+                            <dt>Data de Nascimento</dt>
+                            <dd>@Model.Birthday.ToShortDateString()</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col mr-1">
+                    <div class="card card-body bg-light">
+                        <h4 class="card-title">Endereço</h4>
+                        <dl>
+                            <dt>Rua</dt>
+                            <dd>@Model.Street</dd>
+                            <dt>Número</dt>
+                            <dd>@Model.Number</dd>
+                            <dt>Bairro</dt>
+                            <dd>@Model.Neighborhood</dd>
+                            <dt>Cidade</dt>
+                            <dd>@Model.City</dd>
+                            <dt>Estado</dt>
+                            <dd>@Model.State</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col mr-1">
+                    <div class="card card-body bg-light">
+                        <h4 class="card-title">Contato</h4>
+                        <dl>
+                            <dt>E-mail</dt>
+                            <dd>@Model.Email</dd>
+                            <dt>Telefone</dt>
+                            <dd>@Model.PhoneNumber1</dd>
+                            <dd>@Model.PhoneNumber2</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a class="btn btn-danger" onclick="return confirm('Deseja excluir o Vendedor @Model.Name @Model.Surname?')" asp-action="Delete" asp-route-id="@Model.Id">Excluir Vendedor</a>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Editar Dados</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNDER CONSTRUCTION -->
+
+    <div class="row mb-1">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" hidden>
+                <a class="nav-link" id="batch-tab" data-toggle="tab" href="#batch" role="tab" aria-controls="batch" aria-selected="false">Lotes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" id="catalogBatch-tab" data-toggle="tab" href="#catalogBatch" role="tab" aria-controls="catalogBatch" aria-selected="true">Lotes de Catálogo</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row mb-1">
+        <div class="tab-content w-100" id="myTabContent">
+            <div class="tab-pane fade show active" id="batch" role="tabpanel" aria-labelledby="batch-tab">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Data</th>
+                            <th>1h</th>
+                            <th>2h</th>
+                            <th>3h</th>
+                            <th>6h</th>
+                            <th>Pagamento</th>
+                            <th>Comissão</th>
+                            <th>Valor</th>
+                            <th>Açôes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Batches != null)
+                        {
+                            @foreach (var batch in Model.Batches)
+                            {
+                                double totalValue = (batch.OneHourQty * 2.0) + (batch.TwoHourQty * 3.0) + (batch.ThreeHourQty * 5.0) + (batch.SixHourQty * 10.0);
+                                if (batch.Date < DateTime.Now.AddDays(-15) && !batch.Payment)
+                                {
+                                    <tr style="color: red">
+                                        <td>@batch.Id</td>
+                                        <td>@batch.Date.ToShortDateString()</td>
+                                        <td>@batch.OneHourQty</td>
+                                        <td>@batch.TwoHourQty</td>
+                                        <td>@batch.ThreeHourQty</td>
+                                        <td>@batch.SixHourQty</td>
+                                        <td>@batch.PaymentMethod</td>
+                                        <td>@batch.Comission.ToString() %</td>
+                                        <td>
+                                            @batch.TotalValue.ToString("C2")
+                                            @if (batch.PaymentMethod.Equals("A PRAZO"))
+                                            {
+                                                <span style="color: forestgreen" class="font-weight-bold">[@batch.PaidValue.ToString("C2")]</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a class="btn btn-primary text-white" target="_blank" rel="noopener noreferrer" asp-action="Print" asp-controller="Batch" asp-route-id="@batch.Id">Visualizar</a>
+                                                @if (User.IsInRole("Administrator"))
+                                                {
+                                                    <a class="btn btn-danger" onclick="return confirm('Deseja excluir o Lote @batch.Id?')" asp-action="Delete" asp-controller="Batch" asp-route-batch="@batch.Id" asp-route-seller="@Model.Id">Deletar</a>
+                                                }
+                                                @if (!batch.Payment && User.IsInRole("Administrator"))
+                                                {
+                                                    <!-- Button trigger modal -->
+                                                    <button data-id="@batch.Id" data-total="@batch.TotalValue" data-paid="@batch.PaidValue" type="button" class="btn btn-success js-get-batch" data-toggle="modal" data-target="#payment">
+                                                        Pagar
+                                                    </button>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>@batch.Id</td>
+                                        <td>@batch.Date.ToShortDateString()</td>
+                                        <td>@batch.OneHourQty</td>
+                                        <td>@batch.TwoHourQty</td>
+                                        <td>@batch.ThreeHourQty</td>
+                                        <td>@batch.SixHourQty</td>
+                                        <td>@batch.PaymentMethod</td>
+                                        <td>@batch.Comission.ToString() %</td>
+                                        <td>
+                                            @batch.TotalValue.ToString("C2")
+                                            @if (batch.PaymentMethod.Equals("A PRAZO"))
+                                            {
+                                                <span style="color: forestgreen" class="font-weight-bold">[@batch.PaidValue.ToString("C2")]</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a class="btn btn-primary text-white" target="_blank" rel="noopener noreferrer" asp-action="Print" asp-controller="Batch" asp-route-id="@batch.Id">Visualizar</a>
+                                                @if (User.IsInRole("Administrator"))
+                                                {
+                                                    <a class="btn btn-danger" onclick="return confirm('Deseja excluir o Lote @batch.Id?')" asp-action="Delete" asp-controller="Batch" asp-route-batch="@batch.Id" asp-route-seller="@Model.Id">Deletar</a>
+                                                }
+                                                @if (!batch.Payment && User.IsInRole("Administrator"))
+                                                {
+                                                    <!-- Button trigger modal -->
+                                                    <button data-id="@batch.Id" data-total="@batch.TotalValue" data-paid="@batch.PaidValue" type="button" class="btn btn-success js-get-batch" data-toggle="modal" data-target="#payment">
+                                                        Pagar
+                                                    </button>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="catalogBatch" role="tabpanel" aria-labelledby="catalogBatch-tab">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Pagamento</th>
+                            <th>Comissão</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var catalogBatch in Model.CatalogBatches)
+                        {
+                        <tr>
+                            <td>@catalogBatch.Id</td>
+                            <td>@catalogBatch.Date</td>
+                            <td>@catalogBatch.PaymentMethod</td>
+                            <td>@catalogBatch.Comission</td>
+                            <td>@catalogBatch.TotalValue</td>
+                            <td>
+                                <a class="btn btn-primary text-white" target="_blank" rel="noopener noreferrer" asp-action="Print" asp-controller="CatalogBatch" asp-route-id="@catalogBatch.Id">Visualizar</a>
+                                <a class="btn btn-danger" onclick="return confirm('Deseja excluir o Lote @catalogBatch.Id?')" asp-action="Delete" asp-controller="CatalogBatch" asp-route-id="@catalogBatch.Id" asp-route-sellerid="@Model.Id">Deletar</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+</div>
+        </div>
+    </div>
+
+    <!-- UNDER CONSTRUCTION -->
+</div>
+
+<div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Pagamento do Lote <span id="span-id"></span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Valor Restante: <span id="missing-value"></span></p>
+                <form asp-action="InformPayment" asp-controller="Batch">
+                    <div class="form-group">
+                        <label for="batchId" hidden>Lote</label>
+                        <input class="form-control" hidden name="batchId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="sellerId" hidden>Vendedor</label>
+                        <input class="form-control" hidden value="@Model.Id" name="sellerId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="value">Valor:</label>
+                        <input class="form-control" name="value" id="value"/>
+                    </div>
+                    <input type="submit" onclick="this.form.submit();this.disabled = true;" value="Salvar Pagamento" class="btn btn-success" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

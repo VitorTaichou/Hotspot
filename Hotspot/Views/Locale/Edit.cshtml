@@ -1,0 +1,44 @@
+﻿@model Hotspot.Models.Locale.LocaleViewModel
+
+@{
+    ViewData["Title"] = "Adicionar nova Localidade";
+}
+
+<h2>Editar Localidade</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label" hidden></label>
+                    <input asp-for="Id" class="form-control" hidden/>
+                    <span asp-validation-for="Id" class="text-danger" hidden></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label">Cidade</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="State" class="control-label">Estado</label>
+                    <input asp-for="State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Type" class="control-label">Tipo</label>
+                    <select asp-for="Type" class="form-control">
+                        <option value="CIDADE">Cidade</option>
+                        <option value="COMUNIDADE">Comunidade</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Editar" class="btn btn-primary" />
+                    <a class="btn btn-secondary" asp-action="Index">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

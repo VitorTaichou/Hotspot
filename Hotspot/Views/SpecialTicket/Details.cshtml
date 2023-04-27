@@ -1,0 +1,69 @@
+﻿@model Hotspot.Models.SpecialTicket.SpecialTicketListViewModel
+@{
+    ViewData["Title"] = Model.Name + " " + Model.Surname + " - Vendedor";
+}
+
+<style>
+    .td {
+        vertical-align: middle;
+    }
+
+    .th {
+        vertical-align: middle;
+    }
+</style>
+
+<h2>@(Model.Name + " " + Model.Surname)</h2>
+<h6>Vendedor - Tickets Especiais</h6>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <a class="btn btn-success" asp-controller="SpecialTicket" asp-action="Add" asp-route-sellerId="@Model.Id" asp-route-cashflowId="@Model.CashFlowId">Adicionar Ticket Especial</a>
+        <a class="btn btn-secondary" asp-controller="Seller" asp-action="Details" asp-route-id="@Model.Id">Voltar</a>
+    </div>
+    <div class="row">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Ticket</th>
+                    <th>Conectou a primeira vez?</th>
+                    <th>Vencimento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model.SpecialTickets)
+                {
+                    <tr>
+                        <td>@ticket.Code</td>
+                        <td>
+                            @if (ticket.FirstUse)
+                            {
+                                <span style="color: green" class="font-weight-bold">Sim</span>
+                            }
+                            else
+                            {
+                                <span style="color: red" class="font-weight-bold">Não</span>
+                            }
+                        </td>
+                        <td>
+                            @if (ticket.FirstUse)
+                            {
+                                <span>@ticket.DueDate</span>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-success" asp-controller="SpecialTicket" asp-action="Print" asp-route-id="@ticket.Id">Imprimir</a>
+                            <a class="btn btn-sm btn-danger" asp-controller="SpecialTicket" asp-action="Delete" asp-route-id="@ticket.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
