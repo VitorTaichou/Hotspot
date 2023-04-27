@@ -11,29 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotspot.Services", "Hotspot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotspot.Tools", "Hotspot.Tools\Hotspot.Tools.csproj", "{98583A75-C64E-4477-ACBB-22BB5DAB1055}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MKLandingPage", "MKLandingPage", "{9B6F86D9-42D8-4DB1-B33B-CE44672AED93}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "flash", "flash", "{DE6AA716-BAE4-41A0-95F0-E1460C2207FD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hotspot", "hotspot", "{093C7636-A99C-442B-9B0A-02B48F746EB5}"
-	ProjectSection(SolutionItems) = preProject
-		MKLandingPage\flash\hotspot\alogin.html = MKLandingPage\flash\hotspot\alogin.html
-		MKLandingPage\flash\hotspot\ark.png = MKLandingPage\flash\hotspot\ark.png
-		MKLandingPage\flash\hotspot\error.html = MKLandingPage\flash\hotspot\error.html
-		MKLandingPage\flash\hotspot\errors.txt = MKLandingPage\flash\hotspot\errors.txt
-		MKLandingPage\flash\hotspot\lock.png = MKLandingPage\flash\hotspot\lock.png
-		MKLandingPage\flash\hotspot\lock2.png = MKLandingPage\flash\hotspot\lock2.png
-		MKLandingPage\flash\hotspot\login.css = MKLandingPage\flash\hotspot\login.css
-		MKLandingPage\flash\hotspot\login.html = MKLandingPage\flash\hotspot\login.html
-		MKLandingPage\flash\hotspot\logout.html = MKLandingPage\flash\hotspot\logout.html
-		MKLandingPage\flash\hotspot\md5.js = MKLandingPage\flash\hotspot\md5.js
-		MKLandingPage\flash\hotspot\mobile-apps-3d-ss-1920.jpg = MKLandingPage\flash\hotspot\mobile-apps-3d-ss-1920.jpg
-		MKLandingPage\flash\hotspot\radvert.html = MKLandingPage\flash\hotspot\radvert.html
-		MKLandingPage\flash\hotspot\redirect.html = MKLandingPage\flash\hotspot\redirect.html
-		MKLandingPage\flash\hotspot\rlogin.html = MKLandingPage\flash\hotspot\rlogin.html
-		MKLandingPage\flash\hotspot\status.html = MKLandingPage\flash\hotspot\status.html
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A414DB4-FF2A-4869-8515-B51B94F08A4C}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -64,10 +41,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{DE6AA716-BAE4-41A0-95F0-E1460C2207FD} = {9B6F86D9-42D8-4DB1-B33B-CE44672AED93}
-		{093C7636-A99C-442B-9B0A-02B48F746EB5} = {DE6AA716-BAE4-41A0-95F0-E1460C2207FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCB048D8-EF8B-48B2-B954-28FA25A920FA}
