@@ -17,6 +17,7 @@ namespace Hotspot.Controllers
         private readonly UserManager<EmployeeUser> userManager;
         private readonly SignInManager<EmployeeUser> signInManager;
         private readonly ILog _logService;
+        
 
         public AccountController(UserManager<EmployeeUser> userManager, SignInManager<EmployeeUser> signInManager, ILog logService)
         {
@@ -176,5 +177,6 @@ namespace Hotspot.Controllers
 
             return RedirectToAction("Index", "Account");
         }
+
     }
 }
