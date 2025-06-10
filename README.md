@@ -1,4 +1,4 @@
-# Hotspot Server VelosoNet
+# Hotspot Server
 This is a Hotspot Server, utilized to manage the sellers and tickets.
 
 ## Instalation Guide
